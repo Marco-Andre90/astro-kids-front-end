@@ -31,11 +31,11 @@
 										<v-btn
 											:disabled="!valid"
 											color="#4CC9F0"
-											class="mr-4 mt-10"
+											class="mr-4 mt-10 white--text"
 											@click="validar">Entrar</v-btn>
 										<v-btn
 											color="#F72585"
-											class="ml-4 mt-10">Primeiro Acesso</v-btn>
+											class="ml-4 mt-10 white--text">Primeiro Acesso</v-btn>
 								</v-form>
 							</v-row>
 						</v-container>

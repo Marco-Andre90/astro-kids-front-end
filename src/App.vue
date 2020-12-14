@@ -19,3 +19,10 @@ export default {
   }),
 };
 </script>
+
+<style>
+  *{
+    font-weight: 600;
+    font-family: 'Baloo 2', cursive;
+  }
+</style>
