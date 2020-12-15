@@ -14,7 +14,7 @@ export default new Router ({
     mode: 'history',
     routes: [
         { path: '/', name: 'home',  component: Home },
-        { path: '/cadastramento', component: Cadastro },
+        { path: '/cadastro', component: Cadastro },
         { path: '/login', component: Login },
         { path: '/acesso', component: Login },
         { path: '/familia', component: Familia},

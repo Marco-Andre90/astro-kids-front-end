@@ -2,7 +2,7 @@
 	<v-row class="justify-center pt-12 mt-12">
 		<v-col md="6" cols="12">
 			<v-container class="my-0 py-0">
-				<v-card class="text-center">
+				<v-card outlined class="text-center">
 					<v-card-title class="justify-center"
 								style="background-color: #7209B7">
 						<span class="headline white--text text--accent-2">Login</span>
@@ -14,13 +14,13 @@
 										v-model="valid"
 										lazy-validation>
 										<v-text-field
-											v-model="usuario"
+											v-model="state.login"
 											:counter="15"
 											:rules="userRegras"
 											label="Usuario"
 											required />
 										<v-text-field 
-											v-model="senha"
+											v-model="state.senha"
 											:append-icon="mostrarSenha ? 'mdi-eye' : 'mdi-eye-off'"
 											:rules="senhaRegras"
 											:type="mostrarSenha ? 'text' : 'password'"
@@ -35,6 +35,7 @@
 											@click="validar">Entrar</v-btn>
 										<v-btn
 											color="#F72585"
+											to="/cadastro"
 											class="ml-4 mt-10 white--text">Primeiro Acesso</v-btn>
 								</v-form>
 							</v-row>
@@ -47,11 +48,10 @@
 </template>
 
 <script>
+import store from '../../store'
 export default {
 	data: () => ({
 		valid: true,
-		usuario: '',
-		senha: '',
 		mostrarSenha: false,
 		userRegras: [
 			v => !!v || 'Necessário informar usuário para acesso'
@@ -64,6 +64,14 @@ export default {
 	methods: {
 		validar() {
 			this.$refs.form.validate()
+		},
+		alertmutations(){
+			store.commit('bindLogin', "oi")
+		}
+	},
+	computed: {
+		state() {
+			return store.state.login
 		}
 	}
 }
