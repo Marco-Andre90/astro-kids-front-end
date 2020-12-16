@@ -1,5 +1,17 @@
 <template>
   <v-container fluid class>
+		<v-row class="justify-start ml-8">
+			<v-btn
+				class="mt-3"
+				color="#FFF" 
+				outlined
+				to="/">
+				<v-icon class="mr-2">
+					fa fa-angle-left
+				</v-icon>
+				Voltar
+			</v-btn>
+		</v-row>
 	<h1 class="mt-5 white--text" style="font-weight: 800;">Agenda</h1>
     <v-sheet
       tile

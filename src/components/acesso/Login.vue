@@ -9,20 +9,20 @@
 					</v-card-title>
 					<v-card-text>
 						<v-container>
-							<v-row column class="justify-center text-center" style="">
+							<v-row column class="justify-center text-center">
 								<v-form ref="form"
 										v-model="valid"
 										lazy-validation>
 										<v-text-field
-											v-model="state.login"
+											v-model="acesso.login"
 											:counter="15"
-											:rules="userRegras"
+											:rules="regras"
 											label="Usuario"
 											required />
 										<v-text-field 
-											v-model="state.senha"
+											v-model="acesso.senha"
 											:append-icon="mostrarSenha ? 'mdi-eye' : 'mdi-eye-off'"
-											:rules="senhaRegras"
+											:rules="regras"
 											:type="mostrarSenha ? 'text' : 'password'"
 											label="Senha"
 											hint="Pelo menos 4 caracteres"
@@ -53,12 +53,8 @@ export default {
 	data: () => ({
 		valid: true,
 		mostrarSenha: false,
-		userRegras: [
-			v => !!v || 'Necessário informar usuário para acesso'
-		],
-		senhaRegras: [
-			v => !!v || 'Necessário informar senha',
-			v => v.length >= 4 || 'A senha deve conter no mínimo 4 caracteres'
+		regras: [
+			v => !!v || 'Campo Obrigatório'
 		]
 	}),
 	methods: {
@@ -70,7 +66,7 @@ export default {
 		}
 	},
 	computed: {
-		state() {
+		acesso() {
 			return store.state.login
 		}
 	}
