@@ -9,9 +9,16 @@
 				color="#F72585"
 				to="/agenda"
 				class="ml-4 mt-10 white--text">AGENDA (placeholder)</v-btn>
+			<v-btn
+				color="#F72585"
+				@click="resetaEstado"
+				class="ml-4 mt-10 white--text">RESETA ESTADO (debugger)</v-btn>
 		</v-row>
-		<p class="white--text">
-		{{ usuarioLogado }}</p>
+		<v-container>
+			<p class="white--text text-center mt-10">
+			usuario logado: {{ usuarioLogado }}<br>
+			familia logada: {{ familiaLogada }}</p>
+		</v-container>
         <Login v-if="usuarioLogado.id_usuario == null" />
 	</v-container>
 </template>
@@ -22,6 +29,20 @@ import Login from './acesso/Login'
 export default {
     components: {
         Login
+	},
+	methods: {
+		resetaEstado() {
+			store.replaceState({
+					agenda: store.state.agenda,
+					comunicacao: store.state.comunicacao,
+					familia: {},
+					familiaLogada: store.state.familiaLogada,
+					login: store.state.login,
+					usuario:{},
+					usuarioCrianca:{},
+					usuarioLogado: {}
+			})
+		}
 	},
 	computed: {
 		agenda() {

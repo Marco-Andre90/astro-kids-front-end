@@ -1,18 +1,22 @@
 export function getDefaultUsuario(){
     return {
-        id_usuario: null,
+        idUsuario: null,
         nome: null,
         sobrenome: null,
         tipo: null,
-        data: null,
+        dataNascimento: null,
         celular: null,
         endereco: null,
         email: null,
-        usuario: null,
+        usuarioLogin: null,
         senha: null,
         nomeCriancao: null,
         sobrenomeCrianca: null,
         usuarioCrianca: null,
-        senhaCrianca: null
+        senhaCrianca: null,
+        familia: {
+            idFamilia: null,
+            nomeFamilia: null
+        }
     }
 }

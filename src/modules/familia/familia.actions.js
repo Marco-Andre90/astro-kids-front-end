@@ -1,16 +1,11 @@
-// import api from '../../service/api'
-// import store from '../../store'
+ import api from '../../service/api'
 
-// export const actions = {
-//     logarNoSistema(usuario, senha){
-//         // api.post('login', {usuario, senha}).then( (res) =>{
-
-//         // }).catch((err)=>{
-
-//         // }).finally(() =>{ 
-
-//         // })  
-//     }
-//  registrarFamilia
-//  buscarListaFamiliares
-// }
+ export const actions = {
+     registrarFamilia(context, [familia]){
+         api.post('familia', familia).then(
+             (res)=> {
+                 context.commit('setFamiliaLogada', res.data)
+             }
+         )
+     }
+ }

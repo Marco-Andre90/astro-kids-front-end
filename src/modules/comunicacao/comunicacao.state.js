@@ -1,8 +1,8 @@
 export function getDefaultLogin(){
     return {
-        id_cartao: null,
-        nome_cartao: null,
+        idCartao: null,
+        nomeCartao: null,
         descricao: null,
-        caminho_img: null
+        caminhoImg: null
     }
 }

@@ -1,18 +1,18 @@
 export function getDefaultUsuarioLogado(){
     return {
-        id_usuario: null,
+        idUsuario: null,
         nome: null,
         sobrenome: null,
         tipo: null,
-        data_nascimento: new Date().toISOString().substr(0, 10),
+        dataNascimento: null,
         celular: null,
         endereco: null,
         email: null,
-        usuario_login: null,
+        usuarioLogin: null,
         senha: null,
-        nomeCriancao: null,
-        sobrenomeCrianca: null,
-        usuarioCrianca: null,
-        senhaCrianca: null
+        familia: {
+            idFamilia: null,
+            nomeFamilia: null
+        }
     }
 }

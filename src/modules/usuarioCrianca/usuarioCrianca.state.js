@@ -1,6 +1,6 @@
 export function getDefaultLogin(){
     return {
-        id_usuario: null,
+        idUsuario: null,
         nome: null,
         sobrenome: null,
         tipo: null,
@@ -8,11 +8,7 @@ export function getDefaultLogin(){
         celular: null,
         endereco: null,
         email: null,
-        usuario: null,
-        senha: null,
-        nomeCriancao: null,
-        sobrenomeCrianca: null,
-        usuarioCrianca: null,
-        senhaCrianca: null
+        usuarioLogin: null,
+        senha: null
     }
 }

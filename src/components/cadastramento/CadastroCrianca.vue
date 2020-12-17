@@ -24,7 +24,6 @@
 											v-model="valid"
 											lazy-validation>
 
-											<div v-if="stepCadastro == 1">
 											<v-text-field
 												class="mt-10"
 												v-model="usuario.nome"
@@ -38,7 +37,7 @@
 												required />
 											<v-select
 												v-model="usuario.tipo"
-												:items="setTipos"
+												:items="tiposResponsavel"
 												:rules="regras"
 												label="Tipo de Usuário" />
 											<!-- data -->
@@ -98,7 +97,7 @@
 												label="E-mail (Opcional)" />
 											<v-text-field
 												class="mt-10"
-												v-model="usuario.usuarioLogin"
+												v-model="usuario.usuario_login"
 												:rules="regras"
 												label="Usuario para login"
 												required />
@@ -112,28 +111,30 @@
 												@click:append="mostrarSenha = !mostrarSenha" 
 												required />
 
+											<div v-if="!hasId">
 											<!-- famlia -->
 											<h1 class="mt-10" style="font-weight: 800;">Família</h1>
 											<v-text-field
-												v-model="familia.nomeFamilia"
+												v-model="familia.nome"
 												:rules="regras"
 												:placeholder="usuario.sobrenome"
 												label="Nome da Familia"
 												required />
-											</div>
-											<div v-if="stepCadastro == 2">
 											<!-- criança -->
 											<h1 class="mt-10" style="font-weight: 800;">Criança</h1>
 											<v-text-field
 												v-model="usuarioCrianca.nome"
+												:rules="regras"
 												label="Nome da Criança"
 												required />
 											<v-text-field
 												v-model="usuarioCrianca.sobrenome"
+												:rules="regras"
 												label="Sobrenome da Criança"
 												required />
 											<v-text-field
-												v-model="usuarioCrianca.usuarioLogin"
+												v-model="usuarioCrianca.usuario_login"
+												:rules="regras"
 												label="Usuario da Criança"
 												required />
 											<v-text-field 
@@ -173,14 +174,18 @@ import store from '../../store'
 //import api from '../../service/api'
 export default {
 	data: () => ({
-		stepCadastro: "1",
 		valid: true,
+		nomeFamilia: '',
+		tipo: '',
+		tiposResponsavel: ['Administrador', 'Responsável'],
 		tipos: ['Administrador', 'Responsável', 'Criança'],
 		mostrarSenha: false,
 		date: new Date().toISOString().substr(0, 10),
 		menu: false,
 		modal: false,
-		hasId: false, //não está sendo mais usado mas ficará aqui para futura referencia
+		nomeCrianca: '',
+		sobrenomeCrianca: '',
+		hasId: false,
 		regras: [
 			v => !!v || 'Este campo é obrigatório'
 		],
@@ -192,34 +197,22 @@ export default {
 	methods: {
 		validar() {
 			// if(this.$refs.form.validate()){
-				if(this.stepCadastro == 1){
-					this.registrarFamilia()
-					this.registrar()
-					this.stepCadastro++
-				} else if (this.stepCadastro == 2) {
-					this.registrarCrianca()
-				}
+				this.registrar()
 			// } else {
-			// 	console.log('Falha na validação')
+			// 	console.log('awww')
 			// }
 		},
-		registrarFamilia() {
-			store.dispatch('registrarFamilia', [store.state.familia])
-		},
 		registrar() {
-			store.state.usuario.dataNascimento = this.date
-			store.dispatch('registroUsuario', [store.state.usuario, {app: this}])
-		},
-		registrarCrianca() {
-			store.state.usuarioCrianca.tipo = 'Criança'
-			console.log('ok')
+			store.state.usuario.data_nascimento = this.date
+			this.loading = true
+			store.dispatch('requisicaoZoada', [store.state.usuario, {app: this}])
 		},
 		resetaEstado() {
 			store.replaceState({
 					agenda: store.state.agenda,
 					comunicacao: store.state.comunicacao,
 					familia: {},
-					familiaLogada: {},
+					familiaLogada: store.state.familiaLogada,
 					login: store.state.login,
 					usuario:{},
 					usuarioCrianca:{},
@@ -229,15 +222,6 @@ export default {
 		}
 	},
 	computed: {
-		setTipos() {
-			if(this.stepCadastro == 1) {
-				return ['Administrador']
-			} else if (this.stepCadastro == 2) {
-				return ['Criança']
-			} else {
-				return this.tipos
-			}
-		},
 		agenda() {
 			return store.state.agenda
 		},
@@ -261,14 +245,6 @@ export default {
 		},
 		usuarioLogado() {
 			return store.state.usuarioLogado
-		},
-		//não está sendo mais usado mas ficará aqui para futura referencia
-		temUserLogado() {
-			if(store.state.usuarioLogado.id_usuario == null) {
-				return true
-			} else {
-				return false
-			}
 		}
 	}
 }
