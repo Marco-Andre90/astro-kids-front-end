@@ -1,16 +1,8 @@
-// import api from '../../service/api'
-// import store from '../../store'
+import api from '../../service/api'
 
-// export const actions = {
-//     logarNoSistema(usuario, senha){
-//         // api.post('login', {usuario, senha}).then( (res) =>{
 
-//         // }).catch((err)=>{
-
-//         // }).finally(() =>{ 
-
-//         // })  
-//     }
-//  registrarUsuario
-//  registrarCrianca
-// }
+export const actions = {
+    registraCrianca(context, [usuarioCrianca]){
+        api.post('usuario', usuarioCrianca)
+    }
+}

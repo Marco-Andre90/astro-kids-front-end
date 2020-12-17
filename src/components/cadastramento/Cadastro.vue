@@ -24,8 +24,8 @@
 											v-model="valid"
 											lazy-validation>
 
-											<div v-if="stepCadastro == 1">
-											<v-text-field
+											<div v-if="stepCadastro == 0 || stepCadastro == 1">
+											<v-text-field outlined
 												class="mt-10"
 												v-model="usuario.nome"
 												:rules="regras"
@@ -132,6 +132,55 @@
 												v-model="usuarioCrianca.sobrenome"
 												label="Sobrenome da Criança"
 												required />
+											<!-- data -->
+											<v-menu
+												ref="menu2"
+												v-model="menu2"
+												:close-on-content-click="false"
+												:return-value.sync="date2"
+												transition="scale-transition"
+												offset-y
+												min-width="290px"
+											>
+												<template v-slot:activator="{ on, attrs }">
+												<v-text-field
+													v-model="date2"
+													label="Data de Nascimento"
+													prepend-icon="mdi-calendar"
+													readonly
+													v-bind="attrs"
+													v-on="on"
+												></v-text-field>
+												</template>
+												<v-date-picker
+												v-model="date2"
+												no-title
+												scrollable
+												>
+												<v-spacer></v-spacer>
+												<v-btn
+													text
+													color="primary"
+													@click="menu2 = false"
+												>
+													Cancel
+												</v-btn>
+												<v-btn
+													text
+													color="primary"
+													@click="$refs.menu2.save(date2)"
+												>
+													OK
+												</v-btn>
+												</v-date-picker>
+											</v-menu>
+											<vue-tel-input-vuetify 
+												label="Celular"
+												v-model="usuarioCrianca.celular"></vue-tel-input-vuetify>
+											<v-text-field
+												v-model="usuarioCrianca.endereco"
+												label="Endereço Completo"
+												required />
 											<v-text-field
 												v-model="usuarioCrianca.usuarioLogin"
 												label="Usuario da Criança"
@@ -146,6 +195,7 @@
 												@click:append="mostrarSenha = !mostrarSenha" 
 												required />
 											</div>
+											<!-- fim criança -->
 
 											<v-btn
 												:disabled="!valid"
@@ -173,13 +223,16 @@ import store from '../../store'
 //import api from '../../service/api'
 export default {
 	data: () => ({
-		stepCadastro: "1",
+		stepCadastro: 0,
 		valid: true,
 		tipos: ['Administrador', 'Responsável', 'Criança'],
 		mostrarSenha: false,
 		date: new Date().toISOString().substr(0, 10),
+		date2: new Date().toISOString().substr(0, 10),
 		menu: false,
+		menu2: false,
 		modal: false,
+		modal2: false,
 		hasId: false, //não está sendo mais usado mas ficará aqui para futura referencia
 		regras: [
 			v => !!v || 'Este campo é obrigatório'
@@ -192,12 +245,16 @@ export default {
 	methods: {
 		validar() {
 			// if(this.$refs.form.validate()){
-				if(this.stepCadastro == 1){
+				if (this.stepCadastro == 0){
 					this.registrarFamilia()
+					this.stepCadastro++
+				}
+				if(this.stepCadastro == 1){
 					this.registrar()
 					this.stepCadastro++
 				} else if (this.stepCadastro == 2) {
 					this.registrarCrianca()
+					this.$router.push({ name: 'home' })
 				}
 			// } else {
 			// 	console.log('Falha na validação')
@@ -208,18 +265,19 @@ export default {
 		},
 		registrar() {
 			store.state.usuario.dataNascimento = this.date
-			store.dispatch('registroUsuario', [store.state.usuario, {app: this}])
+			store.dispatch('registroUsuario', [store.state.usuario])
 		},
 		registrarCrianca() {
+			store.state.usuario.dataNascimento = this.date
 			store.state.usuarioCrianca.tipo = 'Criança'
-			console.log('ok')
+			store.dispatch('registraCrianca', [store.state.usuarioCrianca])
 		},
 		resetaEstado() {
 			store.replaceState({
 					agenda: store.state.agenda,
 					comunicacao: store.state.comunicacao,
 					familia: {},
-					familiaLogada: {},
+					familiaLogada: store.state.familiaLogada,
 					login: store.state.login,
 					usuario:{},
 					usuarioCrianca:{},
@@ -230,7 +288,7 @@ export default {
 	},
 	computed: {
 		setTipos() {
-			if(this.stepCadastro == 1) {
+			if(this.stepCadastro == 0 || this.stepCadastro == 1) {
 				return ['Administrador']
 			} else if (this.stepCadastro == 2) {
 				return ['Criança']

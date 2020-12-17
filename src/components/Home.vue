@@ -36,7 +36,7 @@ export default {
 					agenda: store.state.agenda,
 					comunicacao: store.state.comunicacao,
 					familia: {},
-					familiaLogada: store.state.familiaLogada,
+					familiaLogada: {},
 					login: store.state.login,
 					usuario:{},
 					usuarioCrianca:{},

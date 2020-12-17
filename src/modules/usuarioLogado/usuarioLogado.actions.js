@@ -2,11 +2,10 @@ import api from '../../service/api'
 
 
 export const actions = {
-    registroUsuario(context, [usuario, {app}]){
+    registroUsuario(context, [usuario]){
         api.post('usuario', usuario).then(
             (res)=> {
-                context.commit('setUsuarioLogado', res.data) 
-                app.hasId = true
+                context.commit('setUsuarioLogado', res.data)
             }
         )
     }

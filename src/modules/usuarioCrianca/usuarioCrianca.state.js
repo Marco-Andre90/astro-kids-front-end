@@ -1,14 +1,18 @@
-export function getDefaultLogin(){
+export function getDefaultUsuarioCrianca(){
     return {
         idUsuario: null,
         nome: null,
         sobrenome: null,
         tipo: null,
-        data: null,
+        dataNascimento: null,
         celular: null,
         endereco: null,
         email: null,
         usuarioLogin: null,
-        senha: null
+        senha: null,
+        familia: {
+            idFamilia: null,
+            nomeFamilia: null
+        }
     }
 }
