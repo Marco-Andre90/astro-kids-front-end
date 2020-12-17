@@ -1,4 +1,4 @@
-export function getDefaultUsuario(){
+export function getDefaultLogin(){
     return {
         id_usuario: null,
         nome: null,

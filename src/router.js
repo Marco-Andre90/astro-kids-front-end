@@ -20,5 +20,8 @@ export default new Router ({
         { path: '/familia', component: Familia},
         { path: '/comunicacao', component: Comunicacao},
         { path: '/agenda', component: Agenda}
-    ]
+    ],
+    scrollBehavior () {
+        return { x: 0, y: 0 }
+    }
 })

@@ -1,9 +1,5 @@
 export const mutations = { 
-    // alertLogin(state){ 
-    //     console.log(state)
-    // },
-
-    // bindLogin(state, payload){
-    //     state.login = payload
-    // }
+    resetState (state) {
+        Object.assign(state, this.getDefaultUsuario)
+    },
 }
