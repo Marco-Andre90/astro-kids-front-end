@@ -8,12 +8,8 @@ export function getDefaultUsuario(){
         celular: null,
         endereco: null,
         email: null,
-        usuarioLogin: null,
+        userLogin: null,
         senha: null,
-        nomeCriancao: null,
-        sobrenomeCrianca: null,
-        usuarioCrianca: null,
-        senhaCrianca: null,
         familia: {
             idFamilia: null,
             nomeFamilia: null

@@ -8,5 +8,11 @@ export const actions = {
                 context.commit('setUsuarioLogado', res.data)
             }
         )
+    },
+    logarNoSistema(context, [usuario, senha]){
+        api.post('login', {usuario,senha}).then( (res) =>{
+            context.commit('setUsuarioLogado', res.data)
+            window.location.reload()
+        })
     }
 }

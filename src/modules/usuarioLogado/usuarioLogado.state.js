@@ -8,11 +8,12 @@ export function getDefaultUsuarioLogado(){
         celular: null,
         endereco: null,
         email: null,
-        usuarioLogin: null,
+        userLogin: null,
         senha: null,
         familia: {
             idFamilia: null,
             nomeFamilia: null
-        }
+        },
+        cartoes: null
     }
 }

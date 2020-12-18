@@ -5,5 +5,5 @@ import { mutations } from "./comunicacao.mutations"
 export default { 
     state,
     mutations,
-    actions
+    actions,
 }

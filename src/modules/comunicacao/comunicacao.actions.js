@@ -1,18 +1,21 @@
-// import api from '../../service/api'
-// import store from '../../store'
+import api from '../../service/api'
 
-// export const actions = {
-//     logarNoSistema(usuario, senha){
-//         // api.post('login', {usuario, senha}).then( (res) =>{
 
-//         // }).catch((err)=>{
-
-//         // }).finally(() =>{ 
-
-//         // })  
-//     }
-//
-//  enviarCartao
-//  buscarCartoes
-//  buscarListaDeEnvios
-// }
+export const actions = {
+    listarCartoes(context, [{app}]){
+        api.get('cartoes').then((res)=>{
+            context.commit('setCards', res.data)
+            app.isLoaded = true
+        })
+    },
+    enviaCartao(context, [Usuario]){
+        console.log(Usuario)
+        api({
+            method: 'post',
+            url: '/enviar',
+            data: Usuario
+        }).then((res)=>{
+            console.log(res)
+        })
+    }
+}

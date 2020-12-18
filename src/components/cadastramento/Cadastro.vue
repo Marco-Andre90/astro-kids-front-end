@@ -1,31 +1,49 @@
 <template>
-	<v-container fluid>
-		<v-row class="justify-start ml-8">
-			<v-btn
-				class="mt-3"
-				color="#FFF"
-				outlined
-				@click="resetaEstado">
-				<v-icon class="mr-2">
-					fa fa-angle-left
-				</v-icon>
-				Voltar
-			</v-btn>
-		</v-row>
-		<v-row class="justify-end align-stretch mt-0 py-0">
-			<v-col md="5" cols="12">
-				<v-container class="my-0 py-0">
-					<v-card class="text-center" rounded="lg">
-						<v-card-text>
+		<v-row class="justify-end align-stretch py-0">
+			<v-col md="7" cols="12">		
+				<v-row class="justify-start ml-8">
+					<v-btn
+						class="mt-3"
+						color="#FFF"
+						outlined
+						@click="resetaEstado">
+						<v-icon class="mr-2">
+							fa fa-angle-left
+						</v-icon>
+						Voltar
+					</v-btn>
+				</v-row>
+				<v-row column class="justify-center white--text text-justify">
+					<v-col md="8" cols="12" >
+						<h1 class="mt-5" style="font-weight: 800; font-size:31px">
+							Astro Kids foi criado para ser
+							uma ponte entre o nosso
+							usuário com transtornos do
+							espectro autista(TEA) e seus
+							responsáveis, por isso é
+							fundamental o cadastro dos
+							RESPONSAVÉIS em
+							nossa plataforma!
+						</h1>
+					</v-col>
+				</v-row>
+				<v-row column class="justify-end">
+						<v-img  max-width="70%" src="../../assets/imgs/PaiEFilha.png" />
+				</v-row>
+			</v-col>
+			<v-col md="5" cols="12" style="background-color:#fff; height:1200px">
+				<v-container class="mt-10 py-0">
+					<v-card class="text-center" elevation="0">
+						<v-card-text class="mt-20">
 						<h1 class="mt-5" style="font-weight: 800; font-size:40px">Cadastro</h1>
 							<v-container>
-								<v-row column class="justify-center text-center" style="">
+								<v-row column class="justify-center text-center">
 									<v-form ref="form"
 											v-model="valid"
 											lazy-validation>
 
 											<div v-if="stepCadastro == 0 || stepCadastro == 1">
-											<v-text-field outlined
+											<v-text-field
 												class="mt-10"
 												v-model="usuario.nome"
 												:rules="regras"
@@ -98,7 +116,7 @@
 												label="E-mail (Opcional)" />
 											<v-text-field
 												class="mt-10"
-												v-model="usuario.usuarioLogin"
+												v-model="usuario.userLogin"
 												:rules="regras"
 												label="Usuario para login"
 												required />
@@ -215,7 +233,6 @@
 				</v-container>
 			</v-col>
 		</v-row>
-	</v-container>
 </template>
 
 <script>

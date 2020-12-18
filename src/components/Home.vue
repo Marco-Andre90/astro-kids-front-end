@@ -42,6 +42,7 @@ export default {
 					usuarioCrianca:{},
 					usuarioLogado: {}
 			})
+			localStorage.clear()
 		}
 	},
 	computed: {
@@ -69,6 +70,12 @@ export default {
 		usuarioLogado() {
 			return store.state.usuarioLogado
 		}
+	},
+	created(){
+		let user = localStorage.getItem('usuarioLogado')
+			if(user){
+				store.commit('setUsuarioLogado', JSON.parse(user))	
+			}
 	}
 }
 </script>

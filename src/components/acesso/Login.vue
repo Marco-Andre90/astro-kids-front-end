@@ -1,14 +1,11 @@
 <template>
-	<v-row class="justify-center pt-12 mt-12">
-		<v-col md="6" cols="12">
+	<v-row v-if="temUserLogado" class="justify-center pt-12 mt-12">
+		<v-col md="5" cols="12">
 			<v-container class="my-0 py-0">
 				<v-card outlined class="text-center">
-					<v-card-title class="justify-center"
-								style="background-color: #7209B7">
-						<span class="headline white--text text--accent-2">Login</span>
-					</v-card-title>
 					<v-card-text>
-						<v-container>
+						<h1 class="mt-5" style="color: purple; font-weight: 800; font-size:40px">Login</h1>
+						<v-container class="mt-5">
 							<v-row column class="justify-center text-center">
 								<v-form ref="form"
 										v-model="valid"
@@ -55,19 +52,28 @@ export default {
 		mostrarSenha: false,
 		regras: [
 			v => !!v || 'Campo Obrigatório'
-		]
+		],
 	}),
 	methods: {
 		validar() {
 			this.$refs.form.validate()
+			store.dispatch('logarNoSistema', [this.acesso.login, this.acesso.senha])
+			this.$router.push({ name: 'home' })
 		},
-		alertmutations(){
-			store.commit('bindLogin', "oi")
-		}
 	},
 	computed: {
 		acesso() {
 			return store.state.login
+		},
+		usuarioLogado(){
+			return store.state.usuarioLogado
+		},
+		temUserLogado() {
+			if(store.state.usuarioLogado.idUsuario == null) {
+				return true
+			} else {
+				return false
+			}
 		}
 	}
 }

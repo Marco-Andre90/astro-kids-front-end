@@ -3,6 +3,7 @@ export function getDefaultLogin(){
         idCartao: null,
         nomeCartao: null,
         descricao: null,
-        caminhoImg: null
+        caminhoImg: null,
+        cards: null
     }
 }
