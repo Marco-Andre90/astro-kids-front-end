@@ -1,4 +1,5 @@
 # astro-kids
+Front-end of the Astro Kids prototype done for my final thesis. Made with Vue and Vuetify.
 
 ## Project setup
 ```
